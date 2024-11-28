@@ -19,13 +19,13 @@ app.use('/', webRoutes)
 //test connection
 
 //simple query
-connection.query(
-    'SELECT * FROM  Users u ',
-    function (err, results, fields) {
-        console.log('>>>results=', results);
+// connection.query(
+//     'SELECT * FROM  Users u ',
+//     function (err, results, fields) {
+//         console.log('>>>results=', results);
 
-    }
-);
+//     }
+// );
 
 
 app.listen(port, hostname, () => {
