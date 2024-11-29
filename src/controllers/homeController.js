@@ -1,8 +1,9 @@
 const connection = require('../config/database')
+const { getAllUsers } = require('../services/CRUDServices');
 
-
-const getHomepage = (req, res) => {
-    return res.render('home.ejs')
+const getHomepage = async (req, res) => {
+    let result = await getAllUsers();
+    return res.render('home.ejs', { listUsers: result })
 
 }
 const getABC = (req, res) => {
@@ -18,15 +19,7 @@ const postCreateUser = async (req, res) => {
     console.log(">>email =", email, "name = ", name, "city =", city)
 
     // let{email,name,city} = req.body;
-    // connection.query(
-    //     ` INSERT INTO
-    //      Users (email,name,city )
-    //     VALUES (?, ?, ?)`,
-    //     [email, name, city],
-    //     function (err, results) {
-    //         res.send('create user success')
-    //     }
-    // );
+
     let [results, fields] = await connection.query(
         ` INSERT INTO Users (email,name,city )VALUES (?, ?, ?)`, [email, name, city],
     );
@@ -37,6 +30,10 @@ const postCreateUser = async (req, res) => {
 const getCreatePage = (req, res) => {
     res.render("create.ejs")
 }
+const getUpdatePage = (req, res) => {
+    const userId = req.params.id;
+    res.render("edit.ejs")
+}
 module.exports = {
-    getHomepage, getABC, postCreateUser, getCreatePage
+    getHomepage, getABC, postCreateUser, getCreatePage, getUpdatePage
 }
