@@ -1,9 +1,9 @@
 require('dotenv').config(); // thư viện để sử dụng process.env.
 const express = require('express');//commonjs
 const configViewEngine = require('./config/viewEngine');
-const webRoutes = require("./routes/web")  //dat tên j cx dc 
-const connection = require('./config/database')
-
+const webRoutes = require("./routes/web"); //dat tên j cx dc 
+const connection = require('./config/database');
+const mongoose = require('mongoose');
 
 //import express from 'express'
 const app = express();//app express
@@ -18,15 +18,17 @@ app.use(express.urlencoded({ extended: true })) // for form data
 configViewEngine(app)
 
 //khai bao route 
-app.use('/', webRoutes)
+app.use('/', webRoutes);
 
 
-    (async () => {
-        //test connection
-
+(async () => {
+    //test connection
+    try {
         await connection();
         app.listen(port, hostname, () => {
             console.log(`Backend app listening on port ${port}`)
         })
-
-    })()
+    } catch (error) {
+        console.log(">>>error connect to DB:", error)
+    }
+})()
