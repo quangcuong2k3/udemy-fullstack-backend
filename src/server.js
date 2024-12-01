@@ -20,18 +20,13 @@ configViewEngine(app)
 //khai bao route 
 app.use('/', webRoutes)
 
-//test connection
 
-//simple query
-// connection.query(
-//     'SELECT * FROM  Users u ',
-//     function (err, results, fields) {
-//         console.log('>>>results=', results);
+    (async () => {
+        //test connection
 
-//     }
-// );
+        await connection();
+        app.listen(port, hostname, () => {
+            console.log(`Backend app listening on port ${port}`)
+        })
 
-
-app.listen(port, hostname, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+    })()
