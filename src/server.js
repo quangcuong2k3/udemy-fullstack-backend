@@ -2,8 +2,10 @@ require('dotenv').config(); // thư viện để sử dụng process.env.
 const express = require('express');//commonjs
 const configViewEngine = require('./config/viewEngine');
 const webRoutes = require("./routes/web"); //dat tên j cx dc 
+const apiRoutes = require("./routes/api"); //dat tên j cx dc 
 const connection = require('./config/database');
 const mongoose = require('mongoose');
+
 
 //import express from 'express'
 const app = express();//app express
@@ -19,6 +21,7 @@ configViewEngine(app)
 
 //khai bao route 
 app.use('/', webRoutes);
+app.use('/v1/api/', apiRoutes);
 
 
 (async () => {
