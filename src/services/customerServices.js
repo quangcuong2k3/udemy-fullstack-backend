@@ -17,7 +17,16 @@ const createCustomerService = async (customerData) => {
         return null;
     }
 }
+const createArrayCustomerServices = async (arr) => {
+    try {
+        let result = await Customer.insertMany(arr);
+        return result;
+    } catch (error) {
+        console.log("verror", error);
+        return null;
 
+    }
+}
 module.exports = {
-    createCustomerService
+    createCustomerService, createArrayCustomerServices
 }
