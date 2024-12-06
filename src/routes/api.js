@@ -4,7 +4,7 @@ const { getUsersAPI, postCreateUserAPI, putUpdateUserAPI,
     deleteUserAPI, postUploadSingleFileAPI, postUploadMultipleFilesAPI
 } = require('../controllers/apiController');
 const { postCreateCustomer, postCreateArrayCustomer,
-    getAllCustomers, putUpdateCustomers, deleteACustomer
+    getAllCustomers, putUpdateCustomers, deleteACustomer, deleteArrayCustomers
 } = require('../controllers/customerController')
 
 
@@ -20,4 +20,19 @@ routerAPI.post('/customers-many', postCreateArrayCustomer);
 routerAPI.get('/customers', getAllCustomers);
 routerAPI.put('/customers', putUpdateCustomers);
 routerAPI.delete('/customers', deleteACustomer);
+routerAPI.delete('/customers-many', deleteArrayCustomers);
+
+
+routerAPI.get('/info', (req, res) => {
+    console.log("check query", req.query)
+    return res.status(200).json({
+        data: req.query,
+    })
+});
+routerAPI.get('/info/:name/:address', (req, res) => {
+    console.log("check params", req.params)
+    return res.status(200).json({
+        data: req.params,
+    })
+});
 module.exports = routerAPI;

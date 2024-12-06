@@ -27,10 +27,24 @@ const createArrayCustomerServices = async (arr) => {
 
     }
 }
-const getAllCustomerServices = async () => {
+const getAllCustomerService = async (limit, page, name) => {
     try {
-        let result = await Customer.find({});
-        return result;
+        let result = null;
+        if (limit && page) {
+            let offset = (page - 1) * limit;
+            if (name) {
+                result = await Customer.find(
+                    {
+                        "name": { $regex: '.*' + name + '.*' }
+                    }
+                ).skip(offset).limit(limit).exec();
+            }
+            result = await Customer.find({}).skip(offset).limit(limit).exec();
+        } else {
+            result = await Customer.find({});
+        }
+
+        return result
     } catch (error) {
         console.log("error", error);
         return null;
@@ -54,7 +68,17 @@ const deleteACustomerServices = async (id) => {
         return null;
     }
 }
+const deleteArrayCustomerServices = async (arrIds) => {
+    try {
+        let result = await Customer.delete({ _id: { $in: arrIds } });
+        return result;
+    } catch (error) {
+        console.log("error", error);
+        return null;
+    }
+}
 module.exports = {
     createCustomerService, createArrayCustomerServices,
-    getAllCustomerServices, putUpdateCustomerServices, deleteACustomerServices
+    getAllCustomerService, putUpdateCustomerServices,
+    deleteACustomerServices, deleteArrayCustomerServices
 }
