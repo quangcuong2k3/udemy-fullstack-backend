@@ -5,8 +5,7 @@ const webRoutes = require("./routes/web"); //dat tên j cx dc
 const apiRoutes = require("./routes/api"); //dat tên j cx dc 
 const fileUpload = require('express-fileupload');
 const connection = require('./config/database');
-
-
+const { MongoClient } = require('mongodb');
 
 //import express from 'express'
 const app = express();//app express
@@ -32,7 +31,37 @@ app.use('/v1/api/', apiRoutes);
 (async () => {
     //test connection
     try {
-        await connection();
+        //using mongoose
+        // await connection();
+
+        //using mongodb driver
+        // Connection URL
+        const url = process.env.DB_HOST_WITH_DRIVER;
+        const client = new MongoClient(url);
+
+        // Database Name
+        const dbName = process.env.DB_NAME;
+
+        await client.connect();
+        console.log('Connected successfully to server');
+
+        const db = client.db(dbName);
+        const collection = db.collection('customers');
+
+        collection.insertOne({
+            "name": "Cuong ne",
+            address: {
+                province: "bd",
+                country: {
+                    name: "vietnam",
+                    code: 10000
+                }
+            }
+        }
+        )
+        let a = await collection.findOne({ address: "bd" })
+        console.log("find=", a)
+
         app.listen(port, hostname, () => {
             console.log(`Backend app listening on port ${port}`)
         })
