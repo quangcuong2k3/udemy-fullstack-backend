@@ -50,13 +50,24 @@ app.use('/v1/api/', apiRoutes);
 
         collection.insertOne({
             "name": "Cuong ne",
-            address: {
-                province: "bd",
-                country: {
-                    name: "vietnam",
-                    code: 10000
-                }
-            }
+            address:
+                [
+                    {
+                        province: "bd",
+                        country: {
+                            name: "vietnam",
+                            code: 10000
+                        }
+                    },
+                    {
+                        province: "hn",
+                        country: {
+                            name: "vietnam",
+                            code: 10000
+                        }
+                    }
+                ]
+
         }
         )
         let a = await collection.findOne({ address: "bd" })
