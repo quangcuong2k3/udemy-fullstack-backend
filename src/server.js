@@ -47,25 +47,27 @@ app.use('/v1/api/', apiRoutes);
 
         const db = client.db(dbName);
         const collection = db.collection('customers');
-
+        // {
+        //     id:1,
+        //     province: "bd",
+        //     country: {
+        //         name: "vietnam",
+        //         code: 10000
+        //     }
+        // },
+        // {
+        //     id:2,
+        //     province: "hn",
+        //     country: {
+        //         name: "vietnam",
+        //         code: 10000
+        //     }
+        // }
         collection.insertOne({
             "name": "Cuong ne",
             address:
                 [
-                    {
-                        province: "bd",
-                        country: {
-                            name: "vietnam",
-                            code: 10000
-                        }
-                    },
-                    {
-                        province: "hn",
-                        country: {
-                            name: "vietnam",
-                            code: 10000
-                        }
-                    }
+
                 ]
 
         }
