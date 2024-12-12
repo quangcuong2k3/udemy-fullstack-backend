@@ -3,11 +3,14 @@ const routerAPI = express.Router();
 const { getUsersAPI, postCreateUserAPI, putUpdateUserAPI,
     deleteUserAPI, postUploadSingleFileAPI, postUploadMultipleFilesAPI
 } = require('../controllers/apiController');
+
 const { postCreateCustomer, postCreateArrayCustomer,
     getAllCustomers, putUpdateCustomers, deleteACustomer, deleteArrayCustomers
 } = require('../controllers/customerController')
+const { postCreateProjects, getAllProject, updateProject, deleteProject
+} = require('../controllers/projectController')
 
-const { postCreateProjects } = require('../controllers/projectController')
+
 routerAPI.get('/users', getUsersAPI);//muon lay data dung get
 routerAPI.post('/users', postCreateUserAPI);//muon tao moi data dung post
 routerAPI.put('/users', putUpdateUserAPI); //muon update data dung put
@@ -23,7 +26,9 @@ routerAPI.delete('/customers', deleteACustomer);
 routerAPI.delete('/customers-many', deleteArrayCustomers);
 
 routerAPI.post('/projects', postCreateProjects);
-
+routerAPI.get('/projects', getAllProject);
+routerAPI.put('/projects', updateProject);
+routerAPI.delete('/projects', deleteProject);
 
 
 
