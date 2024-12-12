@@ -7,9 +7,12 @@ const { getUsersAPI, postCreateUserAPI, putUpdateUserAPI,
 const { postCreateCustomer, postCreateArrayCustomer,
     getAllCustomers, putUpdateCustomers, deleteACustomer, deleteArrayCustomers
 } = require('../controllers/customerController')
-const { postCreateProjects, getAllProject, updateProject, deleteProject
+const { postCreateProject, getAllProject, updateProject, deleteProject
 } = require('../controllers/projectController')
 
+const { postCreateTask, getAllTask,
+    updateTask, deleteTask
+} = require('../controllers/taskController')
 
 routerAPI.get('/users', getUsersAPI);//muon lay data dung get
 routerAPI.post('/users', postCreateUserAPI);//muon tao moi data dung post
@@ -25,11 +28,17 @@ routerAPI.put('/customers', putUpdateCustomers);
 routerAPI.delete('/customers', deleteACustomer);
 routerAPI.delete('/customers-many', deleteArrayCustomers);
 
-routerAPI.post('/projects', postCreateProjects);
+
 routerAPI.get('/projects', getAllProject);
+routerAPI.post('/projects', postCreateProject);
 routerAPI.put('/projects', updateProject);
 routerAPI.delete('/projects', deleteProject);
 
+
+routerAPI.get('/tasks', getAllTask);
+routerAPI.post('/tasks', postCreateTask);
+routerAPI.put('/tasks', updateTask);
+routerAPI.delete('/tasks', deleteTask);
 
 
 routerAPI.get('/info', (req, res) => {

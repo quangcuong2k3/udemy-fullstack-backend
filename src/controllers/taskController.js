@@ -1,8 +1,9 @@
-const { createProject, getProject, uProject, dProject } = require('../services/productService')
-
+const Task = require('../models/task');
+const { createTask, getTask, uTask, dTask } = require('../services/taskServices')
 module.exports = {
-    postCreateProject: async (req, res) => {
-        let result = await createProject(req.body);
+
+    getAllTask: async (req, res) => {
+        let result = await getTask(req.query);
         return res.status(200).json(
             {
                 EC: 0,
@@ -10,8 +11,8 @@ module.exports = {
             }
         )
     },
-    getAllProject: async (req, res) => {
-        let result = await getProject(req.query);
+    postCreateTask: async (req, res) => {
+        let result = await createTask(req.body);
         return res.status(200).json(
             {
                 EC: 0,
@@ -19,8 +20,9 @@ module.exports = {
             }
         )
     },
-    updateProject: async (req, res) => {
-        let result = await uProject(req.body);
+
+    updateTask: async (req, res) => {
+        let result = await uTask(req.body);
         return res.status(200).json(
             {
                 EC: 0,
@@ -28,8 +30,8 @@ module.exports = {
             }
         )
     },
-    deleteProject: async (req, res) => {
-        let result = await dProject(req.body.id);
+    deleteTask: async (req, res) => {
+        let result = await dTask(req.body.id);
         return res.status(200).json(
             {
                 EC: 0,
