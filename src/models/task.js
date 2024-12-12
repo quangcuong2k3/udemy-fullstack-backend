@@ -13,7 +13,6 @@ const projectSchema = new mongoose.Schema({
     endDate: String,
     description: String,
 });
-
 //shape data
 const taskSchema = new mongoose.Schema(
     {
@@ -32,9 +31,8 @@ const taskSchema = new mongoose.Schema(
         timestamps: true, // createdAt, updatedAt
     }
 );
-
 // Override all methods
 taskSchema.plugin(mongoose_delete, { overrideMethods: 'all' });
 const Task = mongoose.model('Task', taskSchema);
-
 module.exports = Task;
+

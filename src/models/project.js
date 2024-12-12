@@ -9,12 +9,10 @@ const customerSchema = new mongoose.Schema(
         email: String,
     }
 );
-
 const userSchema = new mongoose.Schema({
     name: String,
     email: String
 });
-
 const projectSchema = new mongoose.Schema(
     {
         name: {
@@ -33,11 +31,7 @@ const projectSchema = new mongoose.Schema(
         timestamps: true, // createdAt, updatedAt
     }
 );
-
 // Override all methods
 projectSchema.plugin(mongoose_delete, { overrideMethods: 'all' });
-
 const Project = mongoose.model('Project', projectSchema);
-
 module.exports = Project;
-
