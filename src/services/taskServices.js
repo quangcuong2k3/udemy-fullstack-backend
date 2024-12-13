@@ -26,7 +26,7 @@ module.exports = {
         return null;
     },
     uTask: async (data) => {
-        let result = await Task.updateOne({ _id: data.id }, { ...data })
+        let result = await Task.updateOne({ _id: data.id }, { ...data })//js destructing object
         return result;
     },
     dTask: async (id) => {

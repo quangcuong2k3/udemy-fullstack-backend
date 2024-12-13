@@ -1,6 +1,5 @@
 const Project = require('../models/project');
 const aqp = require('api-query-params');
-
 module.exports = {
     createProject: async (data) => {
         if (data.type === "EMPTY-PROJECT") {
@@ -11,6 +10,14 @@ module.exports = {
             let myProject = await Project.findById(data.projectId).exec();
             for (let i = 0; i < data.usersArr.length; i++) {
                 myProject.usersInfor.push(data.usersArr[i]);
+            }
+            let newResult = await myProject.save();
+            return newResult;
+        }
+        if (data.type === "ADD-TASKS") {
+            let myProject = await Project.findById(data.projectId).exec();
+            for (let i = 0; i < data.taskArr.length; i++) {
+                myProject.tasks.push(data.taskArr[i]);
             }
             let newResult = await myProject.save();
             return newResult;
@@ -29,7 +36,6 @@ module.exports = {
         const page = queryString.page;
 
         const { filter, limit, population } = aqp(queryString);
-
         delete filter.page;
 
         let offset = (page - 1) * limit;
